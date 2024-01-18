@@ -241,7 +241,13 @@ const pets = [
     }
   ];
 
-  const targetElement = document.querySelector("body");
+  const btns = document.querySelector("#btns");
+  btns.innerHTML =`
+  <button type="button" class="btn btn-cats btn-md">Cats</button>
+  <button type="button" class="btn btn-dogs btn-md">Dogs</button>
+  <button type="button" class="btn btn-dino btn-md">Dino</button>
+  `
+  const targetElement = document.querySelector("#container");
   let domString = "";
 
   for (const pet of pets) {
@@ -258,4 +264,4 @@ const pets = [
     </div>`
   }
 
-  targetElement.innerHTML = domString;
+  targetElement.innerHTML += domString;
