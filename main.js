@@ -246,22 +246,79 @@ const pets = [
   <button type="button" class="btn btn-cats btn-md">Cats</button>
   <button type="button" class="btn btn-dogs btn-md">Dogs</button>
   <button type="button" class="btn btn-dino btn-md">Dino</button>
+  <button type="button" class="btn btn-all btn-md">All</button>
   `
   const targetElement = document.querySelector("#container");
-  let domString = "";
+  
 
-  for (const pet of pets) {
-    domString += 
-    `<div class="card border-success mb-3" style="max-width: 18rem;">
-    <div class="card-header bg-transparent border-success">
-    ${pet.name}</div>
-    <div class="card-body text-success">
-      <img src="${pet.imageUrl}" class="card-img-top" alt="...">
-      <h5 class="card-title">${pet.color}</h5>
-      <p class="card-text">Special Skill: ${pet.specialSkill}</p>
-    </div>
-    <div class="card-footer bg-transparent border-success">${pet.type}</div>
-    </div>`
+  //This gets the id of html and puts the content inside that html element
+  const renderToDom = (divID, htmlToRender) => {
+    const selectedDiv = document.querySelector(divID)
+    selectedDiv.innerHTML = htmlToRender;
   }
 
-  targetElement.innerHTML += domString;
+  const cardsOnDOM = (array) => {
+    let domString = "";
+    for (const pet of array) {
+      domString += 
+      `<div class="card border-success mb-3" style="max-width: 18rem;">
+      <div class="card-header bg-transparent border-success">
+      ${pet.name}</div>
+      <div class="card-body text-success">
+        <img src="${pet.imageUrl}" class="card-img-top" alt="...">
+        <h5 class="card-title">${pet.color}</h5>
+        <p class="card-text">Special Skill: ${pet.specialSkill}</p>
+      </div>
+      <div class="card-footer bg-transparent border-success">${pet.type}</div>
+      </div>`
+    }
+
+    renderToDom("#container", domString)
+  }
+  
+  // This is to test that this function works: cardsOnDOM(pets)\
+  /*
+  This is to test renderToDom function
+    let love = `<p>SMall feet</p>`;
+    renderToDom("#container", love)
+  */
+
+  // targetElement.innerHTML += domString;
+
+  const filter = (array, animalString) => {
+
+    const newArray = []
+    for (const pet of array) {
+      if (pet.type === animalString) {
+        newArray.push(pet);
+      } 
+    }
+    return newArray;
+  }
+  
+  
+  const catBtn = document.querySelector(".btn-cats");
+  const dogBtn = document.querySelector(".btn-dogs");
+  const dinoBtn = document.querySelector(".btn-dino");
+  const all = document.querySelector(".btn-all")
+
+  catBtn.addEventListener("click", () => {
+    const theCats = filter(pets, "cat")
+    cardsOnDOM(theCats)
+  });
+
+  dogBtn.addEventListener("click", () => {
+    const theDogs = filter(pets, "dog")
+    cardsOnDOM(theDogs)
+  });
+
+  dinoBtn.addEventListener("click", () => {
+    const theDinos = filter(pets, "dino")
+    cardsOnDOM(theDinos)
+  });
+
+  all.addEventListener("click", () => {
+    cardsOnDOM(pets)
+  });
+
+  
