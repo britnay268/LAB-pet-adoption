@@ -8,8 +8,29 @@
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
+<form>
+    <legend>Add Your Pet!</legend>
+    <div class="mb-3">
+      <input type="text" id="pet-name" class="form-control" placeholder="What's your pet's name?">
+    </div>
+    <div class="mb-3">
+      <input type="text" id="pet-color" class="form-control" placeholder="What color reminds you of your pet?">
+    </div>
+    <div class="mb-3">
+      <input type="text" id="pet-skill" class="form-control" placeholder="What's your pet special skill?">
+    </div>
+    <div class="mb-3">
+      <input type="text" id="pet-type" class="form-control" placeholder="What type of pet you have? (cat, dog, or dino)">
+    </div>
+    <div class="mb-3">
+      <input type="url" id="pet-url" class="form-control" placeholder="Add an image of your pet via a url link">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>   
+  </form>
+
   <div id="btns"></div>
   <div id="container"></div>
+  
   <script src="main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
