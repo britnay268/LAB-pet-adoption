@@ -285,6 +285,8 @@ const pets = [
 
   // targetElement.innerHTML += domString;
 
+  cardsOnDOM(pets)
+
   const filter = (array, animalString) => {
 
     const newArray = []
@@ -322,3 +324,23 @@ const pets = [
   });
 
   
+  const form = document.querySelector("form")
+  
+  const createNewPet = (e) => {
+    e.preventDefault();
+
+    const newPet = {
+      id: pets.length + 1,
+      name: document.querySelector("#pet-name").value,
+      color: document.querySelector("#pet-color").value,
+      specialSkill: document.querySelector("#pet-skill").value,
+      type: document.querySelector("#pet-type").value,
+      imageUrl: document.querySelector("#pet-url").value
+    }
+
+    pets.push(newPet);
+    cardsOnDOM(pets);
+    form.reset();
+  }
+
+  form.addEventListener('submit', createNewPet);
