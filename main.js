@@ -261,7 +261,7 @@ const pets = [
     let domString = "";
     for (const pet of array) {
       domString += 
-      `<div class="card border-success mb-3" style="max-width: 18rem;">
+      `<div id="pet-card" class="card border-success mb-3" style="max-width: 18rem;">
       <div class="card-header bg-transparent border-success">
       ${pet.name}</div>
       <div class="card-body text-success">
@@ -270,6 +270,7 @@ const pets = [
         <p class="card-text">Special Skill: ${pet.specialSkill}</p>
       </div>
       <div class="card-footer bg-transparent border-success">${pet.type}</div>
+      <button type="button" id="del-${pet.id}" class="btn btn-primary btn-sm">Delete</button>
       </div>`
     }
 
@@ -344,3 +345,25 @@ const pets = [
   }
 
   form.addEventListener('submit', createNewPet);
+
+  //Create delete Button
+
+  //Target the div that holds the cards
+  const container = document.querySelector("#container")
+
+  //Create a event listener for Delete button
+  container.addEventListener('click', (event) => {
+    //Target the id of the delete button
+    if (event.target.id.includes("del")) {
+      const [, id] = event.target.id.split("-")
+      
+      //add logic to remove from array
+      const index = pets.findIndex((event) => event.id === Number(id))
+
+      //Modify the original array
+      pets.splice(index, 1)
+
+      //Show the DOM with updated array
+      cardsOnDOM(pets)
+    }
+  })
