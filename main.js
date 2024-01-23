@@ -241,6 +241,8 @@ const pets = [
     }
   ];
 
+  let filterToggle = true;
+
   const btns = document.querySelector("#btns");
   btns.innerHTML =`
   <button type="button" class="btn btn-cats btn-md">Cats</button>
@@ -288,15 +290,17 @@ const pets = [
 
   cardsOnDOM(pets)
 
-  const filter = (array, animalString) => {
+  const filter = (animalString) => {
+
+    filterToggle = false;
 
     const newArray = []
-    for (const pet of array) {
+    for (const pet of pets) {
       if (pet.type === animalString) {
         newArray.push(pet);
       } 
     }
-    return newArray;
+    cardsOnDOM(newArray);
   }
   
   
@@ -306,21 +310,20 @@ const pets = [
   const all = document.querySelector(".btn-all")
 
   catBtn.addEventListener("click", () => {
-    const theCats = filter(pets, "cat")
-    cardsOnDOM(theCats)
+    filter("cat")
   });
 
   dogBtn.addEventListener("click", () => {
-    const theDogs = filter(pets, "dog")
-    cardsOnDOM(theDogs)
+    filter("dog")
+    
   });
 
   dinoBtn.addEventListener("click", () => {
-    const theDinos = filter(pets, "dino")
-    cardsOnDOM(theDinos)
+    filter("dino")
   });
 
   all.addEventListener("click", () => {
+    filterToggle = true
     cardsOnDOM(pets)
   });
 
@@ -360,10 +363,18 @@ const pets = [
       //add logic to remove from array
       const index = pets.findIndex((event) => event.id === Number(id))
 
+      const pet = pets.find((p) => p.id === Number(id))
+
       //Modify the original array
       pets.splice(index, 1)
 
+      if(filterToggle) {
+        cardsOnDOM(pets)
+      } else {
+        filter(pet.type)
+      }
+
       //Show the DOM with updated array
-      cardsOnDOM(pets)
+      // cardsOnDOM(pets)
     }
   })
